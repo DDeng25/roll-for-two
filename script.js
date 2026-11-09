@@ -459,7 +459,6 @@ contactWindow.addEventListener("pointerdown", (event) => {
   contactStartX = event.clientX;
   contactScroll = contactWindow.scrollLeft;
   contactWindow.classList.add("is-dragging");
-  contactWindow.setPointerCapture(event.pointerId);
 });
 
 contactWindow.addEventListener("pointermove", (event) => {
