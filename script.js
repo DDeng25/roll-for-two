@@ -445,6 +445,7 @@ let contactDragging = false;
 let contactStartX = 0;
 let contactScroll = 0;
 let contactMoved = false;
+let pressedPhoto = null;
 
 contactWindow.addEventListener("wheel", (event) => {
   if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
@@ -458,23 +459,30 @@ contactWindow.addEventListener("pointerdown", (event) => {
   contactMoved = false;
   contactStartX = event.clientX;
   contactScroll = contactWindow.scrollLeft;
+  pressedPhoto = event.target.closest(".photo-frame");
   contactWindow.classList.add("is-dragging");
 });
 
 contactWindow.addEventListener("pointermove", (event) => {
   if (!contactDragging) return;
   const delta = event.clientX - contactStartX;
-  if (Math.abs(delta) > 5) contactMoved = true;
+  if (Math.abs(delta) > 5) {
+    contactMoved = true;
+    pressedPhoto = null;
+  }
   contactWindow.scrollLeft = contactScroll - delta;
 });
 
 contactWindow.addEventListener("pointerup", () => {
   contactDragging = false;
   contactWindow.classList.remove("is-dragging");
+  if (pressedPhoto && !contactMoved) pressedPhoto.click();
+  pressedPhoto = null;
 });
 
 $$(".photo-frame").forEach((frame, index) => {
   frame.addEventListener("click", () => {
+    if (photoDialog.open) return;
     if (contactMoved) {
       contactMoved = false;
       return;
