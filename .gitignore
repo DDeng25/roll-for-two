@@ -1,0 +1,13 @@
+# Local tooling
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+node_modules/
+
+# Logs and temporary files
+*.log
+*.tmp
+.cache/
+tmp/

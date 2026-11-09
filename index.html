@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060403">
+  <title>A Roll for Two — Film Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=Reenie+Beanie&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient-grain" aria-hidden="true"></div>
+  <div class="lens-glow" aria-hidden="true"></div>
+  <div class="page-vignette" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="wordmark" href="#opening" aria-label="A Roll for Two, back to the beginning">
+      <span>A ROLL FOR TWO</span>
+      <small>REEL 1 / 4</small>
+    </a>
+    <div class="topbar-right">
+      <span class="sound-state"><i></i><span id="soundLabel">SOUND OFF</span></span>
+      <button class="settings-trigger" id="settingsTrigger" type="button" aria-label="Open settings" aria-expanded="false" aria-controls="settingsPanel">
+        <span>SETTINGS</span>
+        <svg viewBox="-12 -12 24 24" aria-hidden="true">
+          <defs><clipPath id="apertureClip"><circle r="10.2"></circle></clipPath></defs>
+          <circle r="10.2" class="aperture-hole"></circle>
+          <g clip-path="url(#apertureClip)">
+            <g class="aperture-blades">
+              <path d="M-17 0 L5 0 L5 17 L-17 17Z" transform="rotate(0)"></path>
+              <path d="M-17 0 L5 0 L5 17 L-17 17Z" transform="rotate(60)"></path>
+              <path d="M-17 0 L5 0 L5 17 L-17 17Z" transform="rotate(120)"></path>
+              <path d="M-17 0 L5 0 L5 17 L-17 17Z" transform="rotate(180)"></path>
+              <path d="M-17 0 L5 0 L5 17 L-17 17Z" transform="rotate(240)"></path>
+              <path d="M-17 0 L5 0 L5 17 L-17 17Z" transform="rotate(300)"></path>
+            </g>
+          </g>
+          <circle r="10.6" class="aperture-rim"></circle>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <aside class="settings-panel" id="settingsPanel" aria-label="Projection settings" aria-hidden="true">
+    <div class="settings-head">
+      <span>PROJECTOR SETTINGS</span>
+      <button class="settings-close" id="settingsClose" type="button" aria-label="Close settings">×</button>
+    </div>
+    <div class="setting-row">
+      <span>music</span>
+      <button class="toggle-pill" id="musicToggle" type="button" aria-pressed="false">OFF</button>
+    </div>
+    <label class="setting-row" for="volume">
+      <span>volume</span>
+      <input id="volume" type="range" min="0" max="100" value="38">
+    </label>
+    <label class="setting-row" for="grainLevel">
+      <span>grain</span>
+      <input id="grainLevel" type="range" min="0" max="100" value="56">
+    </label>
+    <div class="setting-row">
+      <span>motion</span>
+      <button class="toggle-pill" id="motionToggle" type="button" aria-pressed="true">ON</button>
+    </div>
+    <div class="setting-row">
+      <span>language</span>
+      <div class="segmented" role="group" aria-label="Language">
+        <button class="segment is-active" type="button" data-lang="en">EN</button>
+        <button class="segment" type="button" data-lang="zh">中文</button>
+      </div>
+    </div>
+    <p class="settings-note">A quiet little screening room. Best viewed with headphones.</p>
+  </aside>
+
+  <nav class="reel-nav" aria-label="Reel navigation">
+    <button class="reel-dot is-active" type="button" data-target="opening" aria-label="Opening"><span>01</span></button>
+    <button class="reel-dot" type="button" data-target="darkroom" aria-label="Darkroom"><span>02</span></button>
+    <button class="reel-dot" type="button" data-target="envelope" aria-label="Envelope"><span>03</span></button>
+    <button class="reel-dot" type="button" data-target="gallery" aria-label="Contact sheet"><span>04</span></button>
+    <button class="reel-dot" type="button" data-target="rolls" aria-label="Film rolls"><span>05</span></button>
+    <button class="reel-dot" type="button" data-target="credits" aria-label="Credits"><span>06</span></button>
+  </nav>
+
+  <main>
+    <section class="scene opening" id="opening" data-scene="01">
+      <div class="hero-projector" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="projector-log mono">
+            <span>A ROLL FOR TWO&nbsp;&nbsp;V.01&nbsp;&nbsp;—&nbsp;&nbsp;TONG &amp; CCC</span>
+            <span>400 · 24 EXP · REEL 1 / 4</span>
+            <span>THREADING FILM ............. OK</span>
+            <span>WARMING THE LAMP ........... OK</span>
+            <span>FRAMES FOUND ............... 24</span>
+          </div>
+
+          <div class="hero-title parallax" data-depth="5">
+            <p class="eyebrow">A PRIVATE SCREENING · 35MM MEMORY</p>
+            <h1>A Roll <em>for Two</em></h1>
+            <p class="hero-sub">a love story in twenty-four frames</p>
+          </div>
+
+          <button class="ink-button parallax" id="startButton" type="button" data-depth="10" data-en="roll it, darling" data-zh="放吧，亲爱的">
+            <svg viewBox="0 0 240 92" aria-hidden="true">
+              <path d="M28 51 C18 18 120 3 190 20 C229 30 221 74 146 82 C79 89 16 75 23 45 C29 26 70 13 122 13"></path>
+            </svg>
+            <span>roll it, darling</span>
+          </button>
+
+          <div class="hero-foot">
+            <p class="mono">SINCE<br><b>MAY 2026</b></p>
+            <p class="mono">&nbsp;</p>
+            <p class="mono">RUNNING TIME<br><b><span id="daysTogether">184</span> DAYS &amp; COUNTING</b></p>
+          </div>
+        </div>
+
+        <div class="film-column parallax" data-depth="-8" aria-hidden="true">
+          <div class="film-rail film-rail-a">
+            <figure class="film-cell"><img src="assets/frame-01.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-02.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-03.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-04.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-01.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-02.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-03.jpg" alt=""></figure>
+            <figure class="film-cell"><img src="assets/frame-04.jpg" alt=""></figure>
+          </div>
+        </div>
+      </div>
+      <div class="dust-field" aria-hidden="true"></div>
+      <div class="scroll-stamp mono">SCROLL TO EXPOSE<br>↓</div>
+    </section>
+
+    <section class="scene darkroom" id="darkroom" data-scene="02">
+      <div class="scene-sticky">
+        <div class="darkroom-wall" aria-hidden="true">
+          <div class="wall-seam"></div>
+          <div class="hanging-negatives">
+            <div class="negative">
+              <img src="assets/frame-05.jpg" alt="">
+              <img src="assets/frame-04.jpg" alt="">
+              <img src="assets/frame-03.jpg" alt="">
+              <span>KODAK 400 · 9A ▸ 12 · 12A</span>
+            </div>
+            <div class="negative">
+              <img src="assets/frame-02.jpg" alt="">
+              <img src="assets/frame-07.jpg" alt="">
+              <img src="assets/frame-08.jpg" alt="">
+              <span>KODAK 400 · 13A ▸ 15</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lamp-rig" aria-hidden="true">
+          <div class="lamp-wire"></div>
+          <div class="lamp-brass"></div>
+          <div class="bulb"><span class="filament"></span></div>
+          <div class="lamp-halo"></div>
+        </div>
+
+        <button class="lamp-cord" id="lampCord" type="button" aria-label="Pull the cord to light the darkroom" aria-pressed="false">
+          <span class="cord-line"></span>
+          <span class="cord-bead"></span>
+          <span class="cord-label">pull me</span>
+        </button>
+
+        <article class="radio-unit">
+          <div class="radio-grille">
+            <span class="radio-badge"></span>
+            <span class="radio-knob radio-knob-a"></span>
+            <span class="radio-knob radio-knob-b"></span>
+          </div>
+          <div class="radio-dial">
+            <span>AM</span><i></i><i></i><i></i><i></i><i></i><i></i><span>FM</span>
+          </div>
+        </article>
+
+        <div class="radio-copy">
+          <p class="mono">ON AIR · REQUEST LINE</p>
+          <p class="radio-quote" id="radioQuote"></p>
+          <div class="now-playing"><span class="equalizer"><i></i><i></i><i></i></span><span>NOW PLAYING · SIDE A · 01</span></div>
+          <p class="song-name">The Song We First Danced To</p>
+        </div>
+
+        <div class="scene-id mono top-left">SCENE 02 — THE DARKROOM</div>
+        <div class="scene-id mono top-right">02 / 24</div>
+        <button class="scroll-to-letter" id="toLetter" type="button">
+          <span>SCROLL DOWN</span>
+          <b>⌄</b>
+        </button>
+        <p class="lamp-hint">the room remembers in warm light</p>
+      </div>
+    </section>
+
+    <section class="scene envelope" id="envelope" data-scene="03">
+      <div class="wood-shadow" aria-hidden="true"></div>
+      <div class="envelope-stage">
+        <div class="scene-id mono top-left">SCENE 03 — THE ENVELOPE</div>
+        <div class="scene-id mono top-right">03 / 24</div>
+
+        <div class="desk-note">SOME THINGS<br>TAKE TIME<br>TO DEVELOP</div>
+
+        <div class="letter-sheet" id="letterSheet" aria-live="polite">
+          <div class="letter-head mono"><span>INSIDE · PAGE 1 OF 1</span><span>FOR TONG</span></div>
+          <div class="letter-rule"></div>
+          <pre id="letterText"></pre>
+          <span class="letter-sign">C.</span>
+        </div>
+
+        <div class="processing-envelope" id="processingEnvelope">
+          <div class="tear-strip" id="tearStrip" role="button" tabindex="0" aria-label="Drag to tear open the photo envelope">
+            <svg viewBox="0 0 82 28" aria-hidden="true"><path d="M5 17 C21 7 38 10 54 20 M54 20 L43 18 M54 20 L51 10"></path></svg>
+          </div>
+          <div class="envelope-paper">
+            <div class="envelope-brand"><b>Darkroom <em>No.7</em></b><span>ORDER 0517</span></div>
+            <div class="stamp">PROCESSED<small>WITH CARE</small></div>
+            <dl>
+              <div><dt>NAME</dt><dd>Tong &amp; CCC</dd></div>
+              <div><dt>DATE IN</dt><dd>10 May</dd></div>
+              <div><dt>FILM</dt><dd>35MM · COLOUR · 24 EXP</dd></div>
+            </dl>
+            <div class="checkboxes">
+              <span><i>✓</i> DEVELOP</span>
+              <span><i>✓</i> PRINTS 4×6</span>
+              <span><i></i> MATTE</span>
+              <span><i>✓</i> GLOSSY</span>
+            </div>
+            <p class="envelope-note">PLEASE DON'T LOSE THIS ONE</p>
+            <p class="hand-note">handle with love</p>
+          </div>
+        </div>
+
+        <p class="tear-hint" id="tearHint">drag to tear <span>→</span></p>
+        <button class="next-scene-button" id="toGallery" type="button" disabled>to the contact sheet <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="scene gallery" id="gallery" data-scene="04">
+      <div class="gallery-head">
+        <div>
+          <p class="eyebrow">CONTACT SHEET · ROLL 04</p>
+          <h2>Four rolls, <em>one us.</em></h2>
+          <p>Every ordinary second, wound up and waiting.</p>
+        </div>
+        <div class="gallery-counter mono"><span id="galleryIndex">01</span> / 08 · DRAG / TAP</div>
+      </div>
+
+      <div class="contact-window">
+        <div class="contact-strip" id="contactStrip">
+          <button class="photo-frame" type="button" data-large="assets/frame-01.jpg" data-caption="The first morning we almost missed.">
+            <img src="assets/frame-01.jpg" alt="A misty mountain landscape">
+            <span class="frame-no">09A</span><span class="frame-date">05.10</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-02.jpg" data-caption="You, walking into the light.">
+            <img src="assets/frame-02.jpg" alt="A silhouetted person in a sunlit field">
+            <span class="frame-no">10</span><span class="frame-date">06.18</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-03.jpg" data-caption="Rain on the glass. Your face, half a dream.">
+            <img src="assets/frame-03.jpg" alt="A face seen through rain-covered glass">
+            <span class="frame-no">10A</span><span class="frame-date">07.02</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-04.jpg" data-caption="The coast from a window seat.">
+            <img src="assets/frame-04.jpg" alt="Aerial view of the coastline">
+            <span class="frame-no">11</span><span class="frame-date">07.28</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-05.jpg" data-caption="A city under impossible clouds.">
+            <img src="assets/frame-05.jpg" alt="A city skyline beneath large clouds">
+            <span class="frame-no">11A</span><span class="frame-date">08.09</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-06.jpg" data-caption="Far away, still facing you.">
+            <img src="assets/frame-06.jpg" alt="A vehicle crossing desert dunes">
+            <span class="frame-no">12</span><span class="frame-date">09.19</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-07.jpg" data-caption="Slow Sunday. Nowhere to be.">
+            <img src="assets/frame-07.jpg" alt="A person's feet against a bright window">
+            <span class="frame-no">12A</span><span class="frame-date">10.03</span>
+          </button>
+          <button class="photo-frame" type="button" data-large="assets/frame-08.jpg" data-caption="The long way home.">
+            <img src="assets/frame-08.jpg" alt="Aerial view of a historic city">
+            <span class="frame-no">13</span><span class="frame-date">10.24</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="gallery-footer">
+        <p class="mono">8 FRAMES SELECTED · DEVELOPED AT DARKROOM NO.7</p>
+        <button class="ink-button small" id="toRolls" type="button">
+          <svg viewBox="0 0 240 92" aria-hidden="true"><path d="M28 51 C18 18 120 3 190 20 C229 30 221 74 146 82 C79 89 16 75 23 45 C29 26 70 13 122 13"></path></svg>
+          <span>pull another roll</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="scene rolls" id="rolls" data-scene="05">
+      <div class="rolls-table">
+        <div class="scene-id mono top-left">SCENE 04 — THE ROLLS</div>
+        <div class="scene-id mono top-right">4 ROLLS · 96 FRAMES</div>
+        <div class="rolls-heading">
+          <h2>Pick a roll. <em>Any memory.</em></h2>
+          <p>Four seasons, kept in the dark.</p>
+        </div>
+
+        <div class="canister-field" aria-label="Choose a film roll">
+          <button class="canister canister-cream is-active" type="button" data-roll="mature" aria-pressed="true">
+            <span class="canister-lid"></span>
+            <span class="canister-label"><b>Mature</b><small>ROLL 01 · 24 EXP</small><em>25—26</em></span>
+          </button>
+          <button class="canister canister-red" type="button" data-roll="slow" aria-pressed="false">
+            <span class="canister-lid"></span>
+            <span class="canister-label"><b>slow days</b><small>ROLL 02 · 24 EXP</small><em>2026</em></span>
+          </button>
+          <button class="canister canister-green" type="button" data-roll="far" aria-pressed="false">
+            <span class="canister-lid"></span>
+            <span class="canister-label"><b>far away</b><small>ROLL 03 · 24 EXP</small><em>SEP 26</em></span>
+          </button>
+          <button class="canister canister-black" type="button" data-roll="us" aria-pressed="false">
+            <span class="canister-lid"></span>
+            <span class="canister-label"><b>still us</b><small>ROLL 04 · 24 EXP</small><em>WE</em></span>
+          </button>
+        </div>
+
+        <div class="roll-readout">
+          <div class="roll-meta">
+            <p class="mono" id="rollMeta">ROLL 01 · 2025—2026</p>
+            <h3 id="rollTitle">Mature</h3>
+            <p id="rollLine">“The first roll was mostly mistakes. We kept them anyway.”</p>
+          </div>
+          <div class="roll-preview" id="rollPreview" aria-live="polite"></div>
+        </div>
+
+        <button class="ink-button" id="toCredits" type="button">
+          <svg viewBox="0 0 240 92" aria-hidden="true"><path d="M28 51 C18 18 120 3 190 20 C229 30 221 74 146 82 C79 89 16 75 23 45 C29 26 70 13 122 13"></path></svg>
+          <span>run the credits</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="scene credits" id="credits" data-scene="06">
+      <div class="credits-strip" aria-hidden="true">
+        <div class="credits-strip-inner">
+          <img src="assets/frame-02.jpg" alt="">
+          <img src="assets/frame-05.jpg" alt="">
+          <img src="assets/frame-03.jpg" alt="">
+          <img src="assets/frame-08.jpg" alt="">
+          <img src="assets/frame-02.jpg" alt="">
+          <img src="assets/frame-05.jpg" alt="">
+          <img src="assets/frame-03.jpg" alt="">
+          <img src="assets/frame-08.jpg" alt="">
+        </div>
+      </div>
+      <div class="credits-copy">
+        <div class="projector-log mono">
+          <span>A ROLL FOR TWO&nbsp;&nbsp;V.01&nbsp;&nbsp;—&nbsp;&nbsp;REEL 4 / 4</span>
+          <span>FRAMES SHOWN ............... 24</span>
+          <span>REWINDING .................. <i class="blink">·</i></span>
+        </div>
+        <p class="eyebrow">THE END, FOR NOW</p>
+        <h2>A Roll <em>for Two</em></h2>
+        <dl class="credit-list">
+          <div><dt>DIRECTED BY</dt><dd>GiadaSerena &amp; Claudio</dd></div>
+          <div><dt>STARRING</dt><dd>you <em>and</em> me</dd></div>
+          <div><dt>SHOT ON</dt><dd>Nikon</dd></div>
+          <div><dt>DEVELOPED AT</dt><dd>Darkroom No.7</dd></div>
+          <div><dt>BROUGHT TO YOU BY</dt><dd>every blurry frame</dd></div>
+        </dl>
+        <p class="credits-hand">see you on the next roll</p>
+        <button class="ink-button small" id="restartButton" type="button">
+          <svg viewBox="0 0 240 92" aria-hidden="true"><path d="M28 51 C18 18 120 3 190 20 C229 30 221 74 146 82 C79 89 16 75 23 45 C29 26 70 13 122 13"></path></svg>
+          <span>roll it again</span>
+        </button>
+      </div>
+      <div class="credits-foot mono">
+        <span>REEL 4 / 4</span><span>DARKROOM SEVEN</span><span><b id="creditsDays">184</b> DAYS &amp; COUNTING</span>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="photo-dialog" id="photoDialog">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Close photo">×</button>
+    <div class="dialog-photo-wrap">
+      <img id="dialogPhoto" src="assets/frame-01.jpg" alt="">
+      <span class="dialog-frame-no mono">FRAME 09A</span>
+    </div>
+    <p id="dialogCaption"></p>
+    <small>TAP OUTSIDE OR PRESS ESC TO PUT IT BACK</small>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
